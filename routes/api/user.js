@@ -15,7 +15,11 @@ exports.user = function (req, res) {
             }
         })
     } else {
-        res.end("404")
+        res.end({
+            status: 2,
+            info: 'error',
+            message: '未登录'
+        })
         console.log("未登录，没有访问权限")
     }
 }
