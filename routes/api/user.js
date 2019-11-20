@@ -15,7 +15,7 @@ exports.user = function (req, res) {
             }
         })
     } else {
-        res.end({
+        res.send({
             status: 2,
             info: 'error',
             message: '未登录'
