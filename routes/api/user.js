@@ -20,7 +20,7 @@ exports.user = function (req, res) {
             info: 'error',
             message: '未登录'
         })
-        console.log("未登录，没有访问权限")
+        console.log("未登录")
     }
 }
 exports.login = function (req, res) {
