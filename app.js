@@ -39,6 +39,7 @@ app.use(session({//判断session，进行身份验证
   })
 }))
 //-------------------------配置session中间件----------------------
+
 app.use(cors());//设置跨域
 
 // view engine setup

@@ -1,6 +1,7 @@
 const db = require('../../lib/model/db').db;
 
 exports.user = function (req, res) {
+    console.log(req.session)
     if (req.session.userinfo) {
         db.query('select * from user', (err, result) => {
             if (err) {
@@ -15,7 +16,7 @@ exports.user = function (req, res) {
             }
         })
     } else {
-        res.end({
+        res.send({
             status: 2,
             info: 'error',
             message: '未登录'
