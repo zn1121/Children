@@ -53,11 +53,25 @@ app.use(cookieParser('token'));//自定义字符串，用来对cookie进行签�
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.all('/users', usersRouter);
 
-app.use('/user', user.user)
-app.use('/login', user.login)
-app.use('/loginout', user.loginout)
+app.use('/userApi', function (req, res, next) {//作为中间件，只要是带/userApi都需要登录
+  if (req.session.userinfo) {
+    next()
+  } else {
+    res.send("未登录，请登录")
+    console.log("去登陆的界面")
+    
+  }
+})
+app.all('/userApi/user', user.user)
+app.all('/users', user.users)
+app.all('/userApi/userss', user.userss)
+
+
+app.all('/login', user.login)
+app.all('/loginout', user.loginout)
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
