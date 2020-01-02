@@ -6,71 +6,40 @@ var session = require('express-session');
 var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var MySQLStore = require('express-mysql-session')(session);
-var db = require('./lib/model/db')
-
+var db = require('./lib/model/db');
+var middleware = require('./lib/model/middleware/middleware');
+var auth = require('./routes/auth');
 var cors = require("cors");
 var app = express();
 
 var user = require('./routes/api/user');
-//-------------------------配置session中间件----------------------
-var sessionStore = new MySQLStore({
-  expiration: 10800000,
-  createDatabaseTable: true,  //是否创建表
-  schema: {
-    tableName: 'session_tab',   //表名
-    columnNames: {      //列选项
-      session_id: 'session_id',
-      expires: 'expires',
-      data: 'data'
-    }
-  }
-}, db.session);
-app.use(session({//判断session，进行身份验证
-  secret: 'token',
-  resave: false,
-  saveUninitialized: false,
-  store: sessionStore,
-  cookie: ('name', 'value', {
-    maxAge: 60 * 60 * 1000 * 24,
-    secure: false,
-    name: "seName",
-    resave: false
-  })
-}))
-//-------------------------配置session中间件----------------------
+//配置session中间件
+app.use(middleware.setSession)
 
 app.use(cors());//设置跨域
 
-// view engine setup
+// view engine setup//删除如果接口请求错会报错
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-app.use(logger('dev'));
-app.use(express.json());
+app.use(logger('dev'));//这个是配置日志的
+
+app.use(express.json());//使用JSON有效负载分析传入请求
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser('token'));//自定义字符串，用来对cookie进行签名，提高安全性
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.all('/users', usersRouter);
+// app.all('/users', usersRouter);//all函数会将所有的请求都执行，use只执行当前路径得到中间件
 
-app.use('/userApi', function (req, res, next) {//作为中间件，只要是带/userApi都需要登录
-  if (req.session.userinfo) {
-    next()
-  } else {
-    res.send("未登录，请登录")
-    console.log("去登陆的界面")
-    
-  }
-})
-app.all('/userApi/user', user.user)
-app.all('/users', user.users)
-app.all('/userApi/userss', user.userss)
+app.use('/userApi', auth.checkLogin)//作为中间件，只要是带/userApi都需要登录
+app.get('/userApi/user', user.user)
+app.get('/users', user.users)
+app.get('/userApi/userss', user.userss)
 
-
-app.all('/login', user.login)
-app.all('/loginout', user.loginout)
+//登录、登出用户、session有效期是一小时
+app.get('/login', user.login)
+app.get('/loginout', user.loginout)
 
 
 // catch 404 and forward to error handler
