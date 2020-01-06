@@ -31,8 +31,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 // app.all('/users', usersRouter);//all函数会将所有的请求都执行，use只执行当前路径得到中间件
-
 app.use('/userApi', auth.checkLogin)//作为中间件，只要是带/userApi都需要登录
+
+
 app.get('/userApi/user', user.user)
 app.get('/users', user.users)
 app.get('/userApi/userss', user.userss)
