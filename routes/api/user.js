@@ -59,12 +59,12 @@ exports.userss = function (req, res) {
 }
 
 
-exports.login = function (req, res) {
-    req.session.userinfo = '李四';//设置session
-    res.send("登陆成功！");
-}
-exports.loginout = function (req, res) {
-    req.session.destroy(function (err) {
-        res.send("退出登录！" + err);
-    });
-}
+// exports.login = function (req, res) {
+//     req.session.userinfo = '李四';//设置session
+//     res.send("登陆成功！");
+// }
+// exports.loginout = function (req, res) {
+//     req.session.destroy(function (err) {
+//         res.send("退出登录！" + err);
+//     });
+// }

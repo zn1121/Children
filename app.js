@@ -13,6 +13,10 @@ var cors = require("cors");
 var app = express();
 
 var user = require('./routes/api/user');
+var login = require('./routes/api/login');
+var index = require('./routes/api/index');
+var search = require('./routes/api/search');
+
 //配置session中间件
 app.use(middleware.setSession)
 
@@ -31,16 +35,29 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 // app.all('/users', usersRouter);//all函数会将所有的请求都执行，use只执行当前路径得到中间件
-app.use('/userApi', auth.checkLogin)//作为中间件，只要是带/userApi都需要登录
+app.use('/v1/delet', auth.checkLogin)//作为中间件，只要是带/v1都需要登录
 
 
 app.get('/userApi/user', user.user)
 app.get('/users', user.users)
 app.get('/userApi/userss', user.userss)
+//------------------首页接口---------------
+//获取孩子信息
+app.get('/v1/children', index.children);
+//获取今日育儿知识（两条）
+app.get('/v1/today_article', index.today);
+//------------------首页接口---------------
+
+//------------------搜索接口---------------
+app.get('/v1/search',search.search)
+//------------------搜索接口---------------
+
+
+
 
 //登录、登出用户、session有效期是一小时
-app.get('/login', user.login)
-app.get('/loginout', user.loginout)
+app.get('/login', login.login)
+app.get('/loginout', login.loginout)
 
 
 // catch 404 and forward to error handler
