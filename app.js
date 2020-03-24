@@ -17,7 +17,7 @@ var login = require('./routes/api/login');
 var index = require('./routes/api/index');
 var search = require('./routes/api/search');
 var reply = require('./routes/api/reply');
-
+var goods = require('./routes/api/goods');
 
 //配置session中间件
 app.use(middleware.setSession)
@@ -51,14 +51,27 @@ app.get('/v1/today_article', index.today);
 //------------------首页API---------------
 
 //------------------搜索API---------------
-app.get('/v1/search',search.search)
+app.get('/v1/search', search.search);
 //------------------搜索API---------------
 
 //------------------回复API---------------
 //文章回复API
-app.post('/v1/reply',reply.reply)
-
+app.post('/v1/reply', reply.reply);
+//文章回复的子回复
+app.post('/v1/child_reply', reply.child_reply);
 //------------------回复API---------------
+
+//------------------好物模块---------------\
+//搜索好物
+app.get('/v1/goods_search', goods.goods);
+//好物分类
+app.get('/v1/goods_category', goods.goods_category);
+//热门搜索
+app.get('/v1/goods_hot',goods.goods_hot);//2020年3月24号
+
+
+
+//------------------好物模块---------------
 
 
 
