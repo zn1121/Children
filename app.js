@@ -18,6 +18,7 @@ var index = require('./routes/api/index');
 var search = require('./routes/api/search');
 var reply = require('./routes/api/reply');
 var goods = require('./routes/api/goods');
+var setting = require('./routes/api/my');
 
 //配置session中间件
 app.use(middleware.setSession)
@@ -68,10 +69,25 @@ app.get('/v1/goods_search', goods.goods);
 app.get('/v1/goods_category', goods.goods_category);
 //热门搜索
 app.get('/v1/goods_hot',goods.goods_hot);//2020年3月24号
-
-
-
 //------------------好物模块---------------
+
+
+//------------------我的模块---------------
+//编辑信息
+app.get('/v1/edit',setting.edit);
+//修改密码
+app.get('/v1/pwd',setting.pwd);
+//管理状态
+app.get('/v1/status',setting.status);
+//管理状态页进入宝宝信息
+app.get('/v1/status_info',setting.status_info);
+//添加宝宝
+app.get('/v1/insert_baby',setting.insert_baby);
+
+
+
+//------------------我的模块---------------
+
 
 
 
