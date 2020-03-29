@@ -84,11 +84,9 @@ app.get('/v1/status_info',setting.status_info);
 //添加宝宝
 app.get('/v1/insert_baby',setting.insert_baby);
 
-
-
+//测试
+app.get('/test',setting.age)
 //------------------我的模块---------------
-
-
 
 
 

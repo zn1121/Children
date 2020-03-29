@@ -1,5 +1,7 @@
 const db = require('../../lib/model/db').db;
+var moment = require('moment');
 
+//编辑资料
 exports.edit = function(req,res){
     let {img,name,phone,birth} = req.query;
     db.query('update user set phone=?,birth=?,img=? where user_name=?',[phone,birth,img,name],(err,result)=>{
@@ -14,7 +16,7 @@ exports.edit = function(req,res){
         }
     })
 }
-
+//修改密码
 exports.pwd = function(req,res){
     let {old_password,password,user_name} = req.query;
     db.query('select password from login where user_name=?',[user_name],(err,result_p)=>{
@@ -87,7 +89,9 @@ exports.status_info = function(req,res){
 //添加宝宝
 exports.insert_baby = function(req,res){
     var {name,birth,height,weight,sex,img,user} = req.query;
-    db.query('insert into children_info (name,birth,weight,height,sex,picture,user) values (?,?,?,?,?,?,?)',[name,birth,weight,height,sex,img,user],(err,result)=>{
+    var age = moment().diff(birth,"years");
+    console.log(age)
+    db.query('insert into children_info (name,birth,weight,height,sex,picture,user,age) values (?,?,?,?,?,?,?,?)',[name,birth,weight,height,sex,img,user,age],(err,result)=>{
         if(err){
             res.send({
                 status: 0,
@@ -95,7 +99,15 @@ exports.insert_baby = function(req,res){
                 message: '数据库错误'
             })
         }else{
+            console.log(result)
+
             res.send(200)
         }
     })
+}
+
+
+
+exports.age = function(req,res){
+    
 }

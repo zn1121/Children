@@ -1,5 +1,4 @@
 const db = require('../../lib/model/db').db;
-var moment = require('moment');
 
 //搜索好物
 exports.goods = function(req,res){
