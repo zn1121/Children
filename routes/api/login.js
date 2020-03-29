@@ -1,11 +1,6 @@
 const db = require('../../lib/model/db').db;
-var express = require('express');
-var router = express.Router();
 
 exports.login = function (req, res) {
-    
-
-
     db.query('select * from user', (err, result) => {
         if (err) {
             res.send({

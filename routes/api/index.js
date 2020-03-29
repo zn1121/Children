@@ -1,10 +1,7 @@
 const db = require('../../lib/model/db').db;
-var express = require('express');
-var router = express.Router();
 
 exports.children = function (req, res) {
     var token_user = req.query.user;
-    console.log("这是token——uesr",token_user);
     db.query('select * from children_info where user=?', [token_user], (err, result) => {
         if (err) {
             res.send({
@@ -14,7 +11,6 @@ exports.children = function (req, res) {
             })
         } else {
             res.send(result);
-            console.log("result2", result)
         }
     })
 }

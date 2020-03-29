@@ -1,5 +1,4 @@
 const db = require('../../lib/model/db').db;
-var express = require('express');
 
 exports.search = function (req, res) {
     var search_info = req.query.search_info;

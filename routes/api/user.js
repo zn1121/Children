@@ -1,6 +1,4 @@
 const db = require('../../lib/model/db').db;
-var express = require('express');
-var router = express.Router();
 
 exports.user = function (req, res) {
     console.log(req.session)
