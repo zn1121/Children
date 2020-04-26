@@ -3,8 +3,8 @@ var moment = require('moment');
 
 //编辑资料
 exports.edit = function(req,res){
-    let {img,name,phone,birth} = req.query;
-    db.query('update user set phone=?,birth=?,img=? where user_name=?',[phone,birth,img,name],(err,result)=>{
+    let {img,name,phone,birth,sex,signature} = req.query;
+    db.query('update user set phone=?,birth=?,img=? where user_name=?',[phone,birth,img,name,sex,signature],(err,result)=>{
         if (err) {
             res.send({
                 status: 0,
@@ -13,6 +13,21 @@ exports.edit = function(req,res){
             })
         } else {
            res.send(200);
+        }
+    })
+}
+//获取个人资料
+exports.getUserInfo = function(req,res){
+    let user = req.query.user;
+    db.query('select * from user where user_name=?',[user],(err,result)=>{
+        if (err) {
+            res.send({
+                status: 0,
+                info: 'error',
+                message: '数据库错误'
+            })
+        } else {
+           res.send(result);
         }
     })
 }

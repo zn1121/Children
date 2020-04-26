@@ -75,6 +75,9 @@ app.get('/v1/goods_hot',goods.goods_hot);//2020年3月24号
 //------------------我的模块---------------
 //编辑信息
 app.get('/v1/edit',setting.edit);
+//获取个人资料
+app.get('/v1/getUserInfo',setting.getUserInfo);
+
 //修改密码
 app.get('/v1/pwd',setting.pwd);
 //管理状态
