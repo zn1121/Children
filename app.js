@@ -100,6 +100,9 @@ app.get('/login', user.login);
 app.get('/register', user.register);
 //注销
 app.get('/loginout', user.loginout);
+//验证token
+app.get('/check_token', user.check_token);
+
 //------------------用户模块---------------
 
 
