@@ -69,6 +69,8 @@ app.get('/v1/goods_search', goods.goods);
 app.get('/v1/goods_category', goods.goods_category);
 //热门搜索
 app.get('/v1/goods_hot',goods.goods_hot);//2020年3月24号
+//获取商品详情
+app.get('/v1/good_info',goods.good_info);
 //------------------好物模块---------------
 
 
@@ -77,7 +79,6 @@ app.get('/v1/goods_hot',goods.goods_hot);//2020年3月24号
 app.get('/v1/edit',setting.edit);
 //获取个人资料
 app.get('/v1/getUserInfo',setting.getUserInfo);
-
 //修改密码
 app.get('/v1/pwd',setting.pwd);
 //管理状态

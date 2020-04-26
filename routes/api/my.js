@@ -103,10 +103,10 @@ exports.status_info = function(req,res){
 }
 //添加宝宝
 exports.insert_baby = function(req,res){
-    var {name,birth,height,weight,sex,img,user} = req.query;
+    var {name,birth,height,weight,sex,user} = req.query;
     var age = moment().diff(birth,"years");
     console.log(age)
-    db.query('insert into children_info (name,birth,weight,height,sex,picture,user,age) values (?,?,?,?,?,?,?,?)',[name,birth,weight,height,sex,img,user,age],(err,result)=>{
+    db.query('insert into children_info (name,birth,weight,height,sex,user,age) values (?,?,?,?,?,?,?)',[name,birth,weight,height,sex,img,user,age],(err,result)=>{
         if(err){
             res.send({
                 status: 0,

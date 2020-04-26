@@ -39,4 +39,18 @@ exports.goods_hot = function(req,res){
     res.send(hot)
 }
 
-//
+//获取商品详情
+exports.good_info = function(req,res){
+    let good_id = req.query.good_id;
+    db.query('select * from good_info where id=?',[good_id],(err,result)=>{
+        if (err) {
+            res.send({
+                status: 0,
+                info: 'error',
+                message: '数据库错误'
+            })
+        }else{
+            res.send(result);
+        }
+    })
+}
