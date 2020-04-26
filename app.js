@@ -41,9 +41,9 @@ app.use('/', indexRouter);
 app.use('/v1/delet', auth.checkLogin)//作为中间件，只要是带/v1都需要登录
 
 
-app.get('/userApi/user', user.user)
-app.get('/users', user.users)
-app.get('/userApi/userss', user.userss)
+// app.get('/userApi/user', user.user)
+
+
 //------------------首页API---------------
 //获取孩子信息
 app.get('/v1/children', index.children);
@@ -68,35 +68,43 @@ app.get('/v1/goods_search', goods.goods);
 //好物分类
 app.get('/v1/goods_category', goods.goods_category);
 //热门搜索
-app.get('/v1/goods_hot',goods.goods_hot);//2020年3月24号
+app.get('/v1/goods_hot', goods.goods_hot);//2020年3月24号
 //获取商品详情
-app.get('/v1/good_info',goods.good_info);
+app.get('/v1/good_info', goods.good_info);
 //------------------好物模块---------------
 
 
 //------------------我的模块---------------
 //编辑信息
-app.get('/v1/edit',setting.edit);
+app.get('/v1/edit', setting.edit);
 //获取个人资料
-app.get('/v1/getUserInfo',setting.getUserInfo);
+app.get('/v1/getUserInfo', setting.getUserInfo);
 //修改密码
-app.get('/v1/pwd',setting.pwd);
+app.get('/v1/pwd', setting.pwd);
 //管理状态
-app.get('/v1/status',setting.status);
+app.get('/v1/status', setting.status);
 //管理状态页进入宝宝信息
-app.get('/v1/status_info',setting.status_info);
+app.get('/v1/status_info', setting.status_info);
 //添加宝宝
-app.get('/v1/insert_baby',setting.insert_baby);
-
+app.get('/v1/insert_baby', setting.insert_baby);
 //测试
-app.get('/test',setting.age)
+app.get('/test', setting.age);
 //------------------我的模块---------------
 
 
 
-//登录、登出用户、session有效期是一小时
-app.get('/login', login.login)
-app.get('/loginout', login.loginout)
+//------------------用户模块---------------
+//登录
+app.get('/login', user.login);
+//注册
+app.get('/register', user.register);
+//注销
+app.get('/loginout', user.loginout);
+//------------------用户模块---------------
+
+
+
+
 
 
 // catch 404 and forward to error handler
