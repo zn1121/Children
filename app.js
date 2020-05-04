@@ -53,6 +53,7 @@ app.get('/v1/today_article', index.today);
 
 //------------------搜索API---------------
 app.get('/v1/search', search.search);
+app.get('/v1/article', search.article);
 //------------------搜索API---------------
 
 //------------------回复API---------------

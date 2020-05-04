@@ -30,3 +30,18 @@ exports.search = function (req, res) {
     })
 }
 
+//获取文章详情接口
+exports.article = function(req,res){
+    var id = req.query.id;
+    db.query('select * from article where id=?',[id],(err,result)=>{
+        if (err) {
+            res.send({
+                status: 0,
+                info: 'error',
+                message: '数据库错误'
+            })
+        }else{
+            res.send(result);
+        }
+    })
+}
