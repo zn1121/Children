@@ -41,7 +41,22 @@ exports.article = function(req,res){
                 message: '数据库错误'
             })
         }else{
-            res.send(result);
+            for (let i = 0; i < result.length; i++) {
+                db.query('select * from reply where article=?', [result[i].id], (err, result_reply) => {
+                    if (err) {
+                        res.send({
+                            status: 0,
+                            info: 'error',
+                            message: '数据库错误'
+                        })
+                    } else {
+                        result[i].reply = result_reply
+                    }
+                })
+            }
+            setTimeout(() => {
+                res.send(result)
+            }, 500);
         }
     })
 }
