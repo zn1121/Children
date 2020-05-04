@@ -104,9 +104,8 @@ exports.status_info = function(req,res){
 //添加宝宝
 exports.insert_baby = function(req,res){
     var {name,birth,height,weight,sex,user} = req.query;
-    var age = moment().diff(birth,"years");
-    console.log(age)
-    db.query('insert into children_info (name,birth,weight,height,sex,user,age) values (?,?,?,?,?,?,?)',[name,birth,weight,height,sex,img,user,age],(err,result)=>{
+    var age = moment().diff(birth,'years');
+    db.query('insert into children_info (name,birth,weight,height,sex,user,age) values (?,?,?,?,?,?,?)',[name,birth,weight,height,sex,user,age],(err,result)=>{
         if(err){
             res.send({
                 status: 0,
@@ -114,8 +113,7 @@ exports.insert_baby = function(req,res){
                 message: '数据库错误'
             })
         }else{
-            console.log(result)
-
+            console.log("result:",result)
             res.send(200)
         }
     })
